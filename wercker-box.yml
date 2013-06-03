@@ -38,9 +38,9 @@ default-build:
                 export PATH=$PATH:$GOPATH/bin
                 mkdir $GOPATH/bin
                 mkdir $GOPATH/pkg
-                if test ${GIT_SSH_PROJECT+set} == set; then mkdir -p $GOPATH/src/$GIT_SSH_DOMAIN/$GIT_SSH_OWNER/$GIT_SSH_PROJECT; else ln -s /build $GOPATH/src; fi
-                if test ${GIT_SSH_PROJECT+set} == set; then cp -R /build/* $GOPATH/src/$GIT_SSH_DOMAIN/$GIT_SSH_OWNER/$GIT_SSH_PROJECT;  fi
-                if test ${GIT_SSH_PROJECT+set} == set; then export WERCKER_ROOT=$GOPATH/src/$GIT_SSH_DOMAIN/$GIT_SSH_OWNER/$GIT_SSH_PROJECT; fi
+                if test "${GIT_SSH_PROJECT+set}" == set; then mkdir -p $GOPATH/src/$GIT_SSH_DOMAIN/$GIT_SSH_OWNER/$GIT_SSH_PROJECT; else ln -s /build $GOPATH/src; fi
+                if test "${GIT_SSH_PROJECT+set}" == set; then cp -R /build/* $GOPATH/src/$GIT_SSH_DOMAIN/$GIT_SSH_OWNER/$GIT_SSH_PROJECT;  fi
+                if test "${GIT_SSH_PROJECT+set}" == set; then export WERCKER_ROOT=$GOPATH/src/$GIT_SSH_DOMAIN/$GIT_SSH_OWNER/$GIT_SSH_PROJECT; fi
           - script:
               name: go get
               code:
