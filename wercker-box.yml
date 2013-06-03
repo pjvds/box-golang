@@ -1,13 +1,14 @@
 name: golang
-version: 0.0.4
+version: 0.0.7
 inherits: wercker/ubuntu12.04-webessentials@0.0.3
 type : main
 platform : ubuntu@12.04
-description : python
+description : golang
 keywords:
-  - python
+  - golang
+  - go
 packages :
-  - python
+  - golang
 script : sudo chef-solo -c $WERCKER_SOURCE_DIR/solo.rb -j $WERCKER_SOURCE_DIR/solo.json -l debug
 
 box-detect:
@@ -15,9 +16,7 @@ box-detect:
   version : 
   detect:
     - files:
-      - requirements.txt
-    - files:
-      - setup.py
+      - .godir
       
 default-build:
   python:
@@ -29,14 +28,28 @@ default-build:
       build:
         # The steps that will be executed on build
         steps:
-          # A step that executes `pip install` command
-          - pip-install 
-          
-          # A custom script step, name value is used in the UI
-          # and the code value contains the command that get executed
           - script:
-              name: echo python information
-              code: |
-                echo "python version $(python --version) running"
-                echo "pip version $(pip --version) running"
-          
+            name: setup golang
+            code:
+              mkdir $HOME/mygo
+              export GOPATH=`echo $HOME`mygo
+              export PATH=$PATH:$GOPATH/bin
+              mkdir $GOPATH/bin
+              mkdir $GOPATH/pkg
+              if test ${GIT_SSH_PROJECT+set} == set; then mkdir -p $GOPATH/src/$GIT_SSH_DOMAIN/$GIT_SSH_OWNER/$GIT_SSH_PROJECT; else ln -s /build $GOPATH/src; fi
+              if test ${GIT_SSH_PROJECT+set} == set; then cp -R /build/* $GOPATH/src/$GIT_SSH_DOMAIN/$GIT_SSH_OWNER/$GIT_SSH_PROJECT;  fi
+              if test ${GIT_SSH_PROJECT+set} == set; then export WERCKER_ROOT=$GOPATH/src/$GIT_SSH_DOMAIN/$GIT_SSH_OWNER/$GIT_SSH_PROJECT; fi
+          - script:
+            name: go get
+            code:
+              cd $WERCKER_SOURCE_DIR
+              go version
+              go get ./...
+          - script:
+            name: go build
+            code:
+              go build .
+          - script:
+            name: go test
+            code:
+              go test ./...
