@@ -1,5 +1,5 @@
 name: golang
-version: 0.0.11
+version: 0.0.12
 inherits: wercker/ubuntu12.04-webessentials@0.0.3
 type : main
 platform : ubuntu@12.04
@@ -38,8 +38,8 @@ default-build:
                 export PATH=$PATH:$GOPATH/bin
                 mkdir $GOPATH/bin
                 mkdir $GOPATH/pkg
-                if test "${GIT_SSH_PROJECT+set}" == set; then mkdir -p $GOPATH/src/$GIT_SSH_DOMAIN/$GIT_SSH_OWNER/$GIT_SSH_PROJECT; else ln -s /build $GOPATH/src; fi
-                if test "${GIT_SSH_PROJECT+set}" == set; then cp -R /build/* $GOPATH/src/$GIT_SSH_DOMAIN/$GIT_SSH_OWNER/$GIT_SSH_PROJECT;  fi
+                if test "${GIT_SSH_PROJECT+set}" == set; then mkdir -p $GOPATH/src/$GIT_SSH_DOMAIN/$GIT_SSH_OWNER/$GIT_SSH_PROJECT; else ln -s $WERCKER_SOURCE_DIR $GOPATH/src; fi
+                if test "${GIT_SSH_PROJECT+set}" == set; then cp -R $WERCKER_SOURCE_DIR/* $GOPATH/src/$GIT_SSH_DOMAIN/$GIT_SSH_OWNER/$GIT_SSH_PROJECT;  fi
                 if test "${GIT_SSH_PROJECT+set}" == set; then export WERCKER_ROOT=$GOPATH/src/$GIT_SSH_DOMAIN/$GIT_SSH_OWNER/$GIT_SSH_PROJECT; fi
           - script:
               name: go get
