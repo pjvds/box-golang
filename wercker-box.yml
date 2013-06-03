@@ -1,5 +1,5 @@
 name: golang
-version: 0.0.10
+version: 0.0.11
 inherits: wercker/ubuntu12.04-webessentials@0.0.3
 type : main
 platform : ubuntu@12.04
@@ -34,7 +34,7 @@ default-build:
               name: setup golang
               code: |
                 mkdir $HOME/mygo
-                export GOPATH=`echo $HOME`mygo
+                export GOPATH=$HOME/mygo
                 export PATH=$PATH:$GOPATH/bin
                 mkdir $GOPATH/bin
                 mkdir $GOPATH/pkg
