@@ -1,0 +1,42 @@
+name: golang
+version: 0.0.4
+inherits: wercker/ubuntu12.04-webessentials@0.0.3
+type : main
+platform : ubuntu@12.04
+description : python
+keywords:
+  - python
+packages :
+  - python
+script : sudo chef-solo -c $WERCKER_SOURCE_DIR/solo.rb -j $WERCKER_SOURCE_DIR/solo.json -l debug
+
+box-detect:
+  priority : 900
+  version : 
+  detect:
+    - files:
+      - requirements.txt
+    - files:
+      - setup.py
+      
+default-build:
+  python:
+    priority : 50
+    detect:
+      - default: true
+    text-to-append: |
+      # Build definition
+      build:
+        # The steps that will be executed on build
+        steps:
+          # A step that executes `pip install` command
+          - pip-install 
+          
+          # A custom script step, name value is used in the UI
+          # and the code value contains the command that get executed
+          - script:
+              name: echo python information
+              code: |
+                echo "python version $(python --version) running"
+                echo "pip version $(pip --version) running"
+          
