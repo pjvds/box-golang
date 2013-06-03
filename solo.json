@@ -1,0 +1,4 @@
+{
+
+  "run_list": ["apt", "build-essential", "wercker-essential", "chef-golang" ]
+}
