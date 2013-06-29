@@ -14,7 +14,6 @@ packages :
   - bzr
 script : |
   sudo apt-get update
-  sudo apt-get install golang-stable
   sudo apt-get install bzr
   sudo apt-get install mercurial
   wget https://go.googlecode.com/files/go1.1.linux-amd64.tar.gz
