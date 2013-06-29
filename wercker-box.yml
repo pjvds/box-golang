@@ -17,8 +17,9 @@ script : |
   sudo apt-get install bzr
   sudo apt-get install mercurial
   wget https://go.googlecode.com/files/go1.1.linux-amd64.tar.gz
-  tar -C /usr/local -xzf go1.1.linux-amd64.tar.gz
+  sudo tar -C /usr/local -xzf go1.1.linux-amd64.tar.gz
   echo "export PATH=$PATH:/usr/local/go/bin" >> /etc/profile
+  rm go1.1.linux-amd64.tar.gz
 
 box-detect:
   priority : 900
