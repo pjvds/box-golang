@@ -1,5 +1,5 @@
 name: golang
-version: 0.0.13
+version: 0.0.14
 inherits: wercker/ubuntu12.04-webessentials@0.0.3
 type : main
 platform : ubuntu@12.04
@@ -10,10 +10,11 @@ keywords:
 packages :
   - golang
 script : |
+  sudo add-apt-repository ppa:gophers/go
   sudo apt-get update
+  sudo apt-get install golang-stable
   sudo apt-get install bzr
   sudo apt-get install mercurial
-  sudo chef-solo -c $WERCKER_SOURCE_DIR/solo.rb -j $WERCKER_SOURCE_DIR/solo.json -l debug
 
 box-detect:
   priority : 900
