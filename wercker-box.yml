@@ -1,5 +1,5 @@
 name: golang
-version: 0.0.14
+version: 0.8.0
 inherits: wercker/ubuntu12.04-webessentials@0.0.3
 type : main
 platform : ubuntu@12.04
@@ -9,12 +9,17 @@ keywords:
   - go
 packages :
   - golang
+  - git
+  - mercurial
+  - bzr
 script : |
-  sudo add-apt-repository ppa:gophers/go -y
   sudo apt-get update
   sudo apt-get install golang-stable
   sudo apt-get install bzr
   sudo apt-get install mercurial
+  wget https://go.googlecode.com/files/go1.1.linux-amd64.tar.gz
+  tar -C /usr/local -xzf go1.1.linux-amd64.tar.gz
+  echo "export PATH=$PATH:/usr/local/go/bin" >> /etc/profile
 
 box-detect:
   priority : 900
