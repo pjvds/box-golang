@@ -1,4 +1,4 @@
 {
 
-  "run_list": ["apt", "build-essential", "wercker-essential", "recipe[golang@1.1.0]"]
+  "run_list": ["apt", "build-essential", "wercker-essential", "golang"]
 }
