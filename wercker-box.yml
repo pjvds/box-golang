@@ -11,6 +11,8 @@ packages :
   - golang
 script : |
   sudo apt-get update
+  sudo apt-get install bzr
+  sudo apt-get install mercurial
   sudo chef-solo -c $WERCKER_SOURCE_DIR/solo.rb -j $WERCKER_SOURCE_DIR/solo.json -l debug
 
 box-detect:
