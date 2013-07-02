@@ -8,7 +8,7 @@ keywords:
   - golang
   - go
 packages :
-  - golang
+  - golang@1.1.1
   - git
   - mercurial
   - bzr
