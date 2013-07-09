@@ -1,5 +1,5 @@
 name: golang
-version: 0.9.2
+version: 0.9.3
 inherits: wercker/ubuntu12.04-webessentials@0.0.3
 type : main
 platform : ubuntu@12.04
@@ -47,7 +47,7 @@ default-build:
                 mkdir $GOPATH/bin
                 mkdir $GOPATH/pkg
                 if test "${WERCKER_GIT_REPOSTORY+set}" == set; then mkdir -p "$GOPATH/src/$WERCKER_GIT_DOMAIN/$WERCKER_GIT_OWNER/$WERCKER_GIT_REPOSTORY"; else ln -s $WERCKER_SOURCE_DIR $GOPATH/src; fi
-                if test "${WERCKER_GIT_REPOSTORY+set}" == set; then cp -R $WERCKER_SOURCE_DIR/*" "$GOPATH/src/$WERCKER_GIT_DOMAIN/$WERCKER_GIT_OWNER/$WERCKER_GIT_REPOSTORY"; fi
+                if test "${WERCKER_GIT_REPOSTORY+set}" == set; then cp -R $WERCKER_SOURCE_DIR/* "$GOPATH/src/$WERCKER_GIT_DOMAIN/$WERCKER_GIT_OWNER/$WERCKER_GIT_REPOSTORY"; fi
                 if test "${WERCKER_GIT_REPOSTORY+set}" == set; then export WERCKER_SOURCE_DIR="$GOPATH/src/$WERCKER_GIT_DOMAIN/$WERCKER_GIT_OWNER/$WERCKER_GIT_REPOSTORY"; fi
           - script:
               name: go get
